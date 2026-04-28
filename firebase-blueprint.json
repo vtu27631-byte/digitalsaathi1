@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User progress and preferences",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the user"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["english", "hindi", "tamil", "telugu", "kannada"],
+          "description": "Preferred interface language"
+        },
+        "completedScenarios": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of scenario IDs the user has mastered"
+        },
+        "currentScenarioId": {
+          "type": "string",
+          "description": "Currently active scenario ID"
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["Beginner", "Learning", "Safe User"],
+          "description": "Calculated safety level"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["name", "language", "riskLevel"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Profiles for registered users, keyed by UID"
+    }
+  }
+}
